@@ -48,6 +48,12 @@
         }
 
         function calcdpm(rpm, damage, mag, reload) {
+            if (mag >= rpm) {
+                return damage * rpm;
+            }
+            if (reload >= 60-floor(mag / (rpm/60))) {
+                return damage * mag;
+            }
             // Calculate the number of mags that can be fired in one minute
             let magsPerMin = Math.floor(1 / (mag / rpm + reload / 60));
             
