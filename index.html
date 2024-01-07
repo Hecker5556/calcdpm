@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calc DPM</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-container">
+        <div>
+            <label for="rpm">RPM:</label>
+            <input type="number" id="rpm" oninput="calculateDPM()">
+        </div>
+        <div>
+            <label for="dmg">Damage per Shot:</label>
+            <input type="number" id="dmg" oninput="calculateDPM()">
+        </div>
+        <div>
+            <label for="magsize">Magazine Size:</label>
+            <input type="number" id="magsize" oninput="calculateDPM()">
+        </div>
+        <div>
+            <label for="reload">Reload Time (s):</label>
+            <input type="number" id="reload" oninput="calculateDPM()">
+        </div>
+        <div>
+            <label for="result">DPM:</label>
+            <span id="result">0</span>
+        </div>
+    </div>
+
+    <script>
+        function calculateDPM() {
+            // Get input values
+            let rpm = parseFloat(document.getElementById('rpm').value) || 0;
+            let dmg = parseFloat(document.getElementById('dmg').value) || 0;
+            let magsize = parseFloat(document.getElementById('magsize').value) || 0;
+            let reload = parseFloat(document.getElementById('reload').value) || 0;
+
+            // Calculate DPS using the provided function
+            let dpm = calcdpm(rpm, dmg, magsize, reload);
+
+            // Display the result
+            document.getElementById('result').innerText = dpm.toFixed(2);
+        }
+
+        function calcdpm(rpm, dmg, magsize, reload) {
+            let mags_per_minute = rpm / magsize;
+            let total_reload_time = mags_per_minute * reload;
+            let percent_of_minute = total_reload_time / 60;
+            let real_rpm = rpm - (60 / total_reload_time);
+            return real_rpm * dmg;
+        }
+    </script>
+</body>
+</html>

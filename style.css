@@ -1,0 +1,32 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator-container {
+    text-align: center;
+}
+
+input {
+    padding: 8px;
+    margin: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 150px;
+    box-sizing: border-box;
+}
+
+label {
+    display: block;
+    margin-bottom: 4px;
+}
+
+#result {
+    font-weight: bold;
+    font-size: 18px;
+    color: #3498db;
+}
