@@ -47,9 +47,40 @@
             document.getElementById('result').innerText = dpm.toFixed(2);
         }
 
-        function calcdpm(rpm, dmg, magsize, reload) {
-            return ((magsize*dmg)/(reload+(magsize/(rpm/60))))*60;
-        }
+        function calculateDPM(rpm, damage, mag, reload) {
+            // Calculate the number of mags that can be fired in one minute
+            let magsPerMin = Math.floor(1 / (mag / rpm + reload / 60));
+            
+            // Calculate the time left after firing the last mag
+            let timeLeft = 1 - (mag / rpm + reload / 60) * magsPerMin;
+
+            // Calculate the number of extra bullets that can be fired in the remaining time
+            let extraBullets = Math.floor(timeLeft * rpm);
+
+            // Check if the extra bullets exceed the mag size
+            if (extraBullets > mag) {
+                // If so, adjust the extra bullets to the mag size
+                extraBullets = mag;
+
+                // Recalculate the time left after firing the extra bullets
+                timeLeft = 1 - (mag / rpm + reload / 60) * (magsPerMin + 1);
+            }
+
+            // Check if the time left is enough for another reload
+            if (timeLeft >= reload / 60) {
+                // If so, add another mag to the total bullets
+                extraBullets += mag;
+            }
+
+            // Calculate the total number of bullets fired in one minute
+            let totalBullets = magsPerMin * mag + extraBullets;
+
+            // Calculate the total damage done in one minute
+            let totalDamage = totalBullets * damage;
+
+            // Return the DPM
+            return totalDamage;
+            }
     </script>
 </body>
 </html>
