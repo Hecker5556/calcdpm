@@ -48,11 +48,7 @@
         }
 
         function calcdpm(rpm, dmg, magsize, reload) {
-            let mags_per_minute = rpm / magsize;
-            let total_reload_time = mags_per_minute * reload;
-            let percent_of_minute = total_reload_time / 60;
-            let real_rpm = rpm - (60 / total_reload_time);
-            return real_rpm * dmg;
+            return (magsize*dmg)/(reload + (magsize/(rpm/60)))
         }
     </script>
 </body>
