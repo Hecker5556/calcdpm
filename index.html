@@ -48,7 +48,7 @@
         }
 
         function calcdpm(rpm, dmg, magsize, reload) {
-            return (magsize*dmg)/(reload+(magsize/(rpm/60)))
+            return (magsize*dmg)/(reload+(magsize/Math.floor(rpm/60)))
         }
     </script>
 </body>
