@@ -47,7 +47,7 @@
             document.getElementById('result').innerText = dpm.toFixed(2);
         }
 
-        function calculateDPM(rpm, damage, mag, reload) {
+        function calcDPM(rpm, damage, mag, reload) {
             // Calculate the number of mags that can be fired in one minute
             let magsPerMin = Math.floor(1 / (mag / rpm + reload / 60));
             
